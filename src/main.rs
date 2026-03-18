@@ -96,7 +96,7 @@ fn build_backends(requested: &Option<Vec<BackendKind>>) -> Vec<Backend> {
 
     if all || wants(&BackendKind::Ollama) {
         let model = std::env::var("OLLAMA_MODEL")
-            .unwrap_or_else(|_| "qwen3:14b-instruct-q4_K_M".to_string());
+            .unwrap_or_else(|_| "qwen3:14b-q4_K_M".to_string());
         backends.push(Backend::OpenAiCompat {
             kind: "ollama".to_string(),
             base_url: std::env::var("OLLAMA_URL")
