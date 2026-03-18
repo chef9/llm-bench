@@ -1,0 +1,32 @@
+[
+  {
+    "id": "structured_json",
+    "description": "Emit valid JSON matching a schema",
+    "system": "You are a process modeling assistant. Output ONLY raw JSON — no explanation, no preamble, no markdown fences, no commentary before or after the JSON object.",
+    "user": "A user says: 'I need to track my team's tasks'. Respond ONLY with this exact JSON shape: {\"intent\": \"<string>\", \"entities\": [\"<string>\"], \"proclet_hint\": \"<string>\"}"
+  },
+  {
+    "id": "label_generation",
+    "description": "Generate a short display label from a formal subnet description",
+    "system": "You are a process modeling assistant. Output ONLY raw JSON — no explanation, no preamble, no markdown fences, no commentary before or after the JSON object.",
+    "user": "Given this Petri net subnet description: 'single transition with one input place and one output place, inhibitor arc from a third place preventing firing when the third place is marked'. Respond ONLY with this exact JSON shape: {\"label\": \"<2-4 words>\", \"description\": \"<one sentence>\"}"
+  },
+  {
+    "id": "clarifying_dialogue",
+    "description": "Generate a single clarifying question from ambiguous input",
+    "system": "You are a process modeling assistant. Output ONLY the question text — no preamble, no explanation, no greeting, nothing before or after the question itself.",
+    "user": "A user wants to model: 'our approval process'."
+  },
+  {
+    "id": "graph_write",
+    "description": "Translate natural language to graph operation",
+    "system": "You are a process modeling assistant. Output ONLY raw JSON — no explanation, no preamble, no markdown fences, no commentary before or after the JSON object.",
+    "user": "Convert this request to a graph operation: 'Add a task called Review Contract to the Legal proclet'. Respond ONLY with this exact JSON shape: {\"operation\": \"<string>\", \"node_type\": \"<string>\", \"label\": \"<string>\", \"parent_hint\": \"<string>\"}"
+  },
+  {
+    "id": "deadlock_reasoning",
+    "description": "Reason over a multi-step process to identify a concurrency hazard",
+    "system": "You are a process modeling assistant. Output ONLY a step number followed by a colon and one sentence. Nothing before the step number, nothing after the sentence.",
+    "user": "Here is a process: step 1: receive invoice, step 2: validate fields, step 3: check for duplicate, step 4: route to approver, step 5: approver reviews, step 6: approve or reject, step 7: if rejected notify sender, step 8: if approved post to ledger, step 9: schedule payment, step 10: confirm payment. Which single step is most likely to cause a deadlock in concurrent execution?"
+  }
+]
