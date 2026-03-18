@@ -165,17 +165,23 @@ struct BenchResult {
 
 async fn complete_openai(
     client: &Client,
+    kind: &str,
     base_url: &str,
     model: &str,
     prompt: &Prompt,
 ) -> Result<(u64, u64, u32, String)> {
     let url = format!("{}/v1/chat/completions", base_url);
+    let user_content = if kind == "ollama" {
+        format!("{} /no-think", prompt.user)
+    } else {
+        prompt.user.clone()
+    };
     let body = json!({
         "model": model,
         "stream": true,
         "messages": [
             {"role": "system", "content": prompt.system},
-            {"role": "user",   "content": prompt.user}
+            {"role": "user",   "content": user_content}
         ],
         "max_tokens": 512,
         "temperature": 0.0,
@@ -637,8 +643,8 @@ async fn run_once(
     let timestamp = Utc::now().to_rfc3339();
 
     let result = match backend {
-        Backend::OpenAiCompat { base_url, model, .. } => {
-            complete_openai(client, base_url, model, prompt).await
+        Backend::OpenAiCompat { kind, base_url, model } => {
+            complete_openai(client, kind, base_url, model, prompt).await
         }
         Backend::Claude { api_key, model } => {
             complete_claude(client, api_key, model, prompt).await
